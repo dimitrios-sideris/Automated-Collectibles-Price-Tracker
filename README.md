@@ -171,6 +171,47 @@ Useful optional metadata already present in the example workbook:
 
 There is deliberately **no `Cardmarket Product ID` column**. Marketplace IDs are an implementation detail and are stored in SQLite after automatic matching.
 
+
+## Card format: what information is read from the physical card
+
+The inventory is designed around information that can be read directly from the card or assessed from the physical copy.
+
+<p align="center">
+  <img src="docs/images/card-format-example.png" alt="Annotated Yu-Gi-Oh card showing the information used for identification and pricing" width="800">
+</p>
+
+The annotated example highlights the most useful information:
+
+- **Card Name** — used together with the set/card code to identify the correct printing.
+- **Card Code / Set Code** — one of the most important identifiers, for example `MRD-EN061` or `SDCS-DE044`.
+- **Edition** — for example `1st Edition` or `Unlimited`.
+- **Rarity / Card Finish** — used to distinguish variants when the same card exists in more than one rarity.
+- **Condition** — assessed from the physical card as a whole and stored in the inventory as metadata.
+
+The program also stores **Language** and **Quantity** in the Excel inventory. Language helps describe the physical card, while Quantity determines how many copies contribute to the portfolio total.
+
+### Current valuation assumptions
+
+The tracker is intended to provide a consistent Cardmarket reference valuation rather than an exact resale value.
+
+At the moment, the project makes the following simplifying assumptions:
+
+- Cards are treated as **raw, ungraded cards**.
+- The stored `Condition` is currently **metadata only**. The program does not apply a separate discount or premium for NM, EX, LP, etc.
+- In practice, the displayed benchmark should therefore be interpreted approximately as an **NM/reference-condition market value**.
+- The program does not currently apply a separate language-specific price adjustment.
+- `Edition` is stored and included in the card's matching fingerprint, but the automatic matcher primarily relies on **card name + card code + rarity**.
+- Multiple copies are valued linearly:
+
+```text
+row value = unit benchmark price × quantity
+```
+
+- Shipping costs, marketplace fees, grading premiums and bulk-sale discounts are not included.
+- If the matcher is not confident enough to identify a product, the card remains unpriced rather than being guessed.
+
+These assumptions keep the valuation transparent and reproducible. Condition- or language-specific pricing can be added later without changing the basic inventory format.
+
 ## How matching works
 
 For each new or changed row, `matcher.py`:
