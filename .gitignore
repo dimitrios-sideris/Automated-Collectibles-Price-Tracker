@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Optional private local collection
+# The public Triple_Loose workbook is inventory.example.xlsx.
+data/inventory.xlsx
+
+# Generated database + downloaded/cached source data
+data/*.sqlite
+data/cardmarket_*.json
+data/cache/
+
+# Logs
+logs/*.log
+
+# OS/editor
+.DS_Store
+Thumbs.db
+~$*.xlsx
