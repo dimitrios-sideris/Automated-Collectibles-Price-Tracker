@@ -1,8 +1,30 @@
-# Yu-Gi-Oh Singles Price Tracker
+# Automated Collectibles Price Tracker
 
-A compact Python project that turns a human-readable Excel inventory into a priced Yu-Gi-Oh singles portfolio.
+### Python + SQLite tool for automatic card identification, marketplace matching, daily price updates, and historical portfolio tracking
 
-**You do not need to know Cardmarket product IDs.** Add a card to the `Triple_Loose` sheet using its normal card information; the program identifies the printing, resolves the Cardmarket product, caches that decision, downloads the daily Cardmarket price guide, and shows the result in a Tkinter GUI.
+Ever wondered what those old collectible cards sitting in a box under your bed are actually worth?
+
+This project started from exactly that question.
+
+It turns a simple Excel inventory of collectible cards into a continuously updated and auditable portfolio valuation. The application identifies card printings from normal card information, resolves the corresponding marketplace product, downloads current prices, stores historical values in SQLite, and presents the collection through a desktop GUI.
+
+The current public implementation focuses on **Yu-Gi-Oh cards and Cardmarket data**, but the workflow is built around a more general problem:
+
+> **How can a messy physical collection be converted into structured, validated, automatically updated market data?**
+
+### At a glance
+
+- **Input:** human-readable Excel inventory
+- **Automatic matching:** card name + set code + rarity
+- **Marketplace mapping:** Cardmarket product resolution
+- **Database:** SQLite
+- **Updates:** daily marketplace price snapshots
+- **Quality control:** unresolved and ambiguous matches are flagged instead of guessed
+- **History:** card-level and portfolio-level price tracking
+- **Interface:** Tkinter desktop GUI
+- **Dependencies:** only one third-party Python package (`openpyxl`)
+
+You do **not** need to know Cardmarket Product IDs. Add a card using the information printed on the physical card, and the program handles the product mapping and pricing workflow.
 
 ## What it does
 
